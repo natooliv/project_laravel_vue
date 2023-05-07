@@ -3,5 +3,5 @@
 @section('title', 'Chat - DevChat ')
 
 @section('content')
-  #chat
+  <chat-component></chat-component>
 @endsection
