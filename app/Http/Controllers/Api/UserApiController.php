@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserApiController extends Controller
 {
@@ -16,10 +16,10 @@ class UserApiController extends Controller
         $this->user = $user;
     }
 
+
     public function index(Request $request)
     {
-        $users = $this->user->inRandomOrder()->get();
-
-        return UserResource::collection($users);
+        $users = $this->user->get();
+       return UserResource::collection($users);
     }
 }
