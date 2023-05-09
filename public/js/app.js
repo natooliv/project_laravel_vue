@@ -2172,7 +2172,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)({
+    userConversation: function userConversation(state) {
+      return state.chat.userConversation;
+    },
+    messages: function messages(state) {
+      return state.chat.messages;
+    }
+  }))
+});
 
 /***/ }),
 
@@ -2238,8 +2255,14 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       filter: ''
     };
   },
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['getUsers'])), {}, {
-    openChatWithUser: function openChatWithUser(user) {}
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)({
+    addUserChat: 'ADD_USER_CONVERSATION'
+  })), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['getUsers', 'getMessagesConversation'])), {}, {
+    openChatWithUser: function openChatWithUser(user) {
+      this.activeChat = user.id;
+      this.addUserChat(user);
+      this.getMessagesConversation();
+    }
   })
 });
 
@@ -2291,7 +2314,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
+  return _vm.userConversation != null ? _c("div", {
     staticClass: "chat-window is-active"
   }, [_c("div", {
     staticClass: "chat-window__wrapper"
@@ -2321,7 +2344,7 @@ var render = function render() {
   })])]), _vm._v(" "), _c("img", {
     staticClass: "w-10 h-10 rounded-full",
     attrs: {
-      src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+      src: [_vm.userConversation.photo != "" ? _vm.userConversation.photo : "/images/no-photo.png"],
       alt: ""
     }
   })]), _vm._v(" "), _c("div", {
@@ -2330,9 +2353,9 @@ var render = function render() {
     staticClass: "mt-1 flex items-center"
   }, [_c("span", {
     staticClass: "text-lg font-medium text-gray-700 mr-3"
-  }, [_vm._v(_vm._s("Carlos Ferreira"))])]), _vm._v(" "), _c("span", {
+  }, [_vm._v(_vm._s(_vm.userConversation.name))])]), _vm._v(" "), _c("span", {
     staticClass: "text-sm text-muted"
-  }, [_vm._v("Junior Developer")])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.userConversation.email))])])]), _vm._v(" "), _c("div", {
     staticClass: "flex items-center space-x-2"
   }, [_c("button", {
     staticClass: "inline-flex items-center justify-center rounded-full h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none",
@@ -2356,7 +2379,28 @@ var render = function render() {
     }
   })])])])]), _vm._v(" "), _c("div", {
     staticClass: "chat-window__messages-wrapper"
-  }, [_vm._m(0), _vm._v(" "), _c("div", {
+  }, [_c("div", {
+    staticClass: "chat-window__messages-inner"
+  }, [_vm._v("\n        <"), _c("div", {
+    staticClass: "chat-messages"
+  }, _vm._l(_vm.messages, function (message, index) {
+    return _c("div", {
+      key: index,
+      "class": [message.me ? "my-message" : "his-message"]
+    }, [_c("div", {
+      staticClass: "inner"
+    }, [!message.me ? _c("div", {
+      staticClass: "profile"
+    }, [_c("img", {
+      staticClass: "w-10 h-10 rounded-full",
+      attrs: {
+        src: [message.sender.photo != "" ? message.sender.photo : "/images/no-photo.png"],
+        alt: message.sender.name
+      }
+    })]) : _vm._e(), _vm._v(" "), _c("div", {
+      staticClass: "ballon-text"
+    }, [_c("div", [_vm._v(_vm._s(message.message))])])])]);
+  }), 0)]), _vm._v(" "), _c("div", {
     staticClass: "chat-input w-full px-4 mb-4"
   }, [_c("div", {
     staticClass: "flex flex-row items-center h-16 rounded-xl px-4 bg-white"
@@ -2377,7 +2421,7 @@ var render = function render() {
       "stroke-width": "2",
       d: "M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
     }
-  })])])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
+  })])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "ml-4"
   }, [_c("button", {
     staticClass: "flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0"
@@ -2398,115 +2442,9 @@ var render = function render() {
       "stroke-width": "2",
       d: "M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
     }
-  })])])])])])])])])]);
+  })])])])])])])])])]) : _vm._e();
 };
 var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "chat-window__messages-inner"
-  }, [_c("div", {
-    staticClass: "chat-messages"
-  }, [_c("div", {
-    staticClass: "his-message"
-  }, [_c("div", {
-    staticClass: "inner"
-  }, [_c("div", {
-    staticClass: "profile"
-  }, [_c("img", {
-    staticClass: "w-10 h-10 rounded-full",
-    attrs: {
-      src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
-      alt: ""
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "ballon-text"
-  }, [_c("div", [_vm._v("Hey How are you today?")])])])]), _vm._v(" "), _c("div", {
-    staticClass: "his-message"
-  }, [_c("div", {
-    staticClass: "inner"
-  }, [_c("div", {
-    staticClass: "profile"
-  }, [_c("img", {
-    staticClass: "w-10 h-10 rounded-full",
-    attrs: {
-      src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
-      alt: ""
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "ballon-text"
-  }, [_c("div", [_vm._v("\n                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.\n                  Vel ipsa commodi illum saepe numquam maxime asperiores\n                  voluptate sit, minima perspiciatis.\n                ")])])])]), _vm._v(" "), _c("div", {
-    staticClass: "my-message"
-  }, [_c("div", {
-    staticClass: "inner"
-  }, [_c("div", {
-    staticClass: "profile"
-  }, [_c("img", {
-    staticClass: "w-10 h-10 rounded-full",
-    attrs: {
-      src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
-      alt: ""
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "ballon-text"
-  }, [_c("div", [_vm._v("I'm ok what about you?")])])])]), _vm._v(" "), _c("div", {
-    staticClass: "my-message"
-  }, [_c("div", {
-    staticClass: "inner"
-  }, [_c("div", {
-    staticClass: "profile"
-  }, [_c("img", {
-    staticClass: "w-10 h-10 rounded-full",
-    attrs: {
-      src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
-      alt: ""
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "ballon-text"
-  }, [_c("div", [_vm._v("\n                  Lorem ipsum dolor sit, amet consectetur adipisicing. ?\n                ")])])])]), _vm._v(" "), _c("div", {
-    staticClass: "his-message"
-  }, [_c("div", {
-    staticClass: "inner"
-  }, [_c("div", {
-    staticClass: "profile"
-  }, [_c("img", {
-    staticClass: "w-10 h-10 rounded-full",
-    attrs: {
-      src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
-      alt: ""
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "ballon-text"
-  }, [_c("div", [_vm._v("Lorem ipsum dolor sit amet !")])])])]), _vm._v(" "), _c("div", {
-    staticClass: "my-message"
-  }, [_c("div", {
-    staticClass: "inner"
-  }, [_c("div", {
-    staticClass: "profile"
-  }, [_c("img", {
-    staticClass: "w-10 h-10 rounded-full",
-    attrs: {
-      src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
-      alt: ""
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "ballon-text"
-  }, [_c("div", [_vm._v("\n                  Lorem ipsum dolor sit, amet consectetur adipisicing. ?\n                ")])])])]), _vm._v(" "), _c("div", {
-    staticClass: "his-message"
-  }, [_c("div", {
-    staticClass: "inner"
-  }, [_c("div", {
-    staticClass: "profile"
-  }, [_c("img", {
-    staticClass: "w-10 h-10 rounded-full",
-    attrs: {
-      src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
-      alt: ""
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "ballon-text"
-  }, [_c("div", [_vm._v("\n                  Lorem ipsum dolor sit amet consectetur adipisicing elit.\n                  Perspiciatis, in.\n                ")])])])])])]);
-}, function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
@@ -2708,9 +2646,12 @@ var render = function render() {
     return _c("div", {
       key: index
     }, [_c("li", {
-      staticClass: "bg-white hover:bg-gray-100 border-b p-4 cursor-pointer",
-      "class": {
-        "is-active": _vm.activeChat === index
+      "class": ["hover:bg-gray-100", "border-b", "p-4", "cursor-pointer", _vm.activeChat === user.id ? "is-active" : "bg-white"],
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.openChatWithUser(user);
+        }
       }
     }, [_c("div", {
       staticClass: "flex items-center relative"
