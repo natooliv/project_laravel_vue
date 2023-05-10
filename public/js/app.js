@@ -2709,9 +2709,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var userId = window.Laravel.user;
-window.Echo.channel("larachat_database_private-chat.".concat(userId)).listen('NewMessageCreated', function (e) {
-  var conversation = e.message;
-  console.log(conversation);
+window.Echo.channel("larachat_database_private-chat.".concat(userId)).listen('.\\App\\Events\\NewMessageCreated', function (e) {
+  console.log(e.message);
   vue__WEBPACK_IMPORTED_MODULE_1__["default"].$vToastify.success("\n         Messagem: ".concat(conversation.message, "\n    "), "".concat(conversation.sender.name, " te enviou uma nova mensagem"));
 });
 window.Echo.join('laravel_database_chatroom').here(function (users) {

@@ -4,9 +4,8 @@ import store from './vuex/store'
 const userId = window.Laravel.user
 
 window.Echo.channel(`larachat_database_private-chat.${userId}`)
-.listen('NewMessageCreated', (e) => {
-    let conversation = e.message
-    console.log(conversation);
+.listen('.\\App\\Events\\NewMessageCreated', (e) => {
+    console.log(e.message);
 
     Vue.$vToastify.success(`
          Messagem: ${conversation.message}
