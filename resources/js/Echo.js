@@ -1,5 +1,9 @@
-import users from "./vuex/modules/users";
-import store from './vuex/store';
+import Vue from 'vue'
+import store from './vuex/store'
+
+const userId = window.Laravel.userId;
+
+window.
 
 window.Echo.join('laravel_database_chatroom')
 .here(users=>{
