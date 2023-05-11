@@ -20,6 +20,6 @@ class ProtectedProject
             return $next($request);
         }
 
-        return redirect()->away('https://academy.especializati.com.br/curso/curso-larachat');
+        return redirect()->away();
     }
 }

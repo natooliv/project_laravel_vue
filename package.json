@@ -10,6 +10,7 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@types/socket.io-client": "^3.0.0",
         "bootstrap": "^4.0.0",
         "jquery": "^3.2",
         "laravel-mix": "^6.0.6",
@@ -25,6 +26,7 @@
     "dependencies": {
         "axios": "^0.21",
         "laravel-echo": "^1.10.0",
+        "laravel-echo-server": "^1.6.3",
         "socket.io-client": "^2.3.0",
         "vue": "^2.5.17",
         "vue-router": "^3.5.1",

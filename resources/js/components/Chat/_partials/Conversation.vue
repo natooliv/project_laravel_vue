@@ -65,7 +65,7 @@
       <div class="chat-window__messages-wrapper">
         <!-- chat msgs  -->
         <div class="chat-window__messages-inner">
-          <<div class="chat-messages">
+          <div class="chat-messages">
             <div
                 v-for="(message, index) in messages"
                 :key="index"
