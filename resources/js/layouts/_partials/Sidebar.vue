@@ -1,13 +1,13 @@
 <template>
     <aside class="chat-aside">
       <div class="px-2 lg:py-2">
-
-      </div>
-      <nav class="nav-tab">
         <img
           class="w-24 lg:w-full mx-auto"
-          src="https://img.freepik.com/vetores-premium/cabeca-de-mulher-samurai-usa-mascara-cibernetica-no-logotipo-do-estilo-cyberpunk_132871-279.jpg?w=2000"
+          src="htps://img.freepik.com/vetores-premium/cabeca-de-mulher-samurai-usa-mascara-cibernetica-no-logotipo-do-estilo-cyberpunk_132871-279.jpg?w=2000"
         />
+      </div>
+      <nav class="nav-tab">
+
         <router-link :to="{ name: 'home' }">
           <svg
             class="w-8 h-8"

@@ -2834,7 +2834,7 @@ var staticRenderFns = [function () {
   }, [_c("img", {
     staticClass: "w-24 lg:w-full mx-auto",
     attrs: {
-      src: "https://www.canva.com/design/DAFivS8pVRI/view"
+      src: "htps://img.freepik.com/vetores-premium/cabeca-de-mulher-samurai-usa-mascara-cibernetica-no-logotipo-do-estilo-cyberpunk_132871-279.jpg?w=2000"
     }
   })]);
 }];
