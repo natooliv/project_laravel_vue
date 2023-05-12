@@ -1,8 +1,8 @@
 <template>
-  <div class="chat-sidebar">
+  <div class="chat-sidebar overflow-y-auto">
     <div class="px-8 lg:py-4 lg:px-6">
       <h3 class="text-xl font-semibold tracking-wide mt-5 hidden lg:block">
-        Conversas
+        {{ title }}
       </h3>
       <div class="relative my-5 text-gray-600">
         <input
@@ -38,19 +38,19 @@
     <ul class="flex flex-col chat-list">
       <div v-for="(user, index) in users" :key="index">
         <li
-        @click.prevent="openChatWithUser(user)"
-        :class="['hover:bg-gray-100', 'border-b', 'p-4', 'cursor-pointer',
+          @click.prevent="openChatWithUser(user)"
+          :class="['hover:bg-gray-100', 'border-b', 'p-4', 'cursor-pointer',
           activeChat === user.id ? 'is-active' : 'bg-white' ]"
         >
           <div class="flex items-center relative">
             <div class="relative">
               <img
-                :src="[user.photo != '' ? user.photo : 'https://img2.gratispng.com/20180331/eow/kisspng-computer-icons-user-clip-art-user-5abf13db298934.2968784715224718991702.jpg']"
+                :src="[user.photo != '' ? user.photo : '/images/no-photo.png']"
                 :alt="user.name"
                 class="w-12 h-12 rounded-full"
               />
               <span
-              v-if="user.online"
+                v-if="user.online"
                 class="text-green-500 absolute -bottom-0.5 -right-0.5 rounded-full bg-white border-white border-4"
               >
                 <svg width="10" height="10">
@@ -70,8 +70,9 @@
               >22/02/2024</time
             > -->
             <span
+              v-show="user.unreadMessages > 0"
               class="absolute bottom-0 right-0 text-xs font-medium bg-indigo-500 text-white text-circle"
-              >3</span
+              >{{ user.unreadMessages }}</span
             >
           </div>
         </li>
@@ -81,50 +82,66 @@
 </template>
 
 <script>
-import {mapActions,mapState,mapGetters,mapMutations} from'vuex';
+import { mapActions, mapState, mapGetters, mapMutations } from "vuex";
 
 export default {
-    mounted() {
-        this.getUsers();
-    },
-    computed:{
-        // ...mapState({
-        //     users: (state) => state.users.users,
-        // }),
 
+  props: {
+      allUsers: {
+          require: true,
+          type: Array,
+      },
+      title: {
+          require: true,
+          type: String
+      }
+  },
 
+  computed: {
 
-        ...mapGetters({
-            allUsers: 'sortedUsers',
-        }),
-        users(){
-            return this.allUsers.filter(user => {
-               if(this.filter == '')return user;
-               return user.name.includes(this.filter)||user.email.includes(this.filter);
+    users () {
+        return this.allUsers.filter(user => {
+            if (this.filter === '') return user;
+
+            return user.name.includes(this.filter) || user.email === this.filter
         })
-        }
-    },
+    }
+  },
+
   data() {
     return {
       selected: "inbox",
-      activeChat: 0,
-      filter:'',
-
+      activeChat: null,
+      filter: ''
     };
   },
-methods: {
-    ...mapMutations({
-       addUserChat: 'ADD_USER_CONVERSATION'
-    }),
-    ...mapActions(['getUsers','getMessagesConversation']),
 
-    openChatWithUser(user){
-        this.activeChat=user.id;
+  methods: {
+    ...mapMutations({
+        addUserChat: 'ADD_USER_CONVERSATION',
+    }),
+    ...mapActions(["getMessagesConversation"]),
+
+    openChatWithUser (user) {
+        this.activeChat = user.id
+
         this.addUserChat(user)
 
         this.getMessagesConversation()
-
     }
-}
+  },
 };
 </script>
+
+<style scoped>
+.chat-sidebar::-webkit-scrollbar-track {
+    background-color: #F4F4F4;
+}
+.chat-sidebar::-webkit-scrollbar {
+    width: 6px;
+    background: #F4F4F4;
+}
+.chat-sidebar::-webkit-scrollbar-thumb {
+    background: #dad7d7;
+}
+</style>
