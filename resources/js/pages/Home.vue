@@ -1,6 +1,6 @@
 <template>
     <div class="chat-container relative">
-        <users :all-users="allUsers"  :title="'Desenvolvedores'"></users>
+        <users :all-users="allUsers"  :title="'Desenvolvedoras'"></users>
         <conversation></conversation>
     </div>
 </template>

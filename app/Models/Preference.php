@@ -9,9 +9,13 @@ class Preference extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['me_notify', 'image_background_chat'];
+    protected $fillable = [
+        'me_notify',
+        'image_background_chat',
+    ];
 
     protected $casts = [
-        'me_notify' => 'boolean'
+        'me_notify' => 'boolean',
     ];
+
 }

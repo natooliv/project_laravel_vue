@@ -2157,6 +2157,9 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
     },
     messages: function messages(state) {
       return state.chat.messages;
+    },
+    me: function me(state) {
+      return state.me.me;
     }
   })),
   data: function data() {
@@ -2369,7 +2372,56 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)({
+    me: function me(state) {
+      return state.me.me;
+    }
+  })),
+  data: function data() {
+    return {
+      isLougouting: false
+    };
+  },
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['updatePhotoProfile', 'update', 'toogleNotify', 'updateImageChat', 'removeImageChat', 'logout'])), {}, {
+    updatePhoto: function updatePhoto(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (files.length == 0) return;
+      var formData = new FormData();
+      formData.append('image', files[0]);
+      this.updatePhotoProfile(formData);
+    },
+    updateProfile: function updateProfile() {
+      this.update({
+        name: this.me.name
+      });
+    },
+    updateBackgroundChat: function updateBackgroundChat(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (files.length == 0) return;
+      var formData = new FormData();
+      formData.append('image', files[0]);
+      this.updateImageChat(formData);
+    },
+    logoutNow: function logoutNow() {
+      var _this = this;
+      this.isLogouting = true;
+      this.logout().then(function (response) {
+        return window.location.reload();
+      })["finally"](function () {
+        return _this.isLogouting = false;
+      });
+    }
+  })
+});
 
 /***/ }),
 
@@ -2418,7 +2470,7 @@ var render = function render() {
   })])]), _vm._v(" "), _c("img", {
     staticClass: "w-10 h-10 rounded-full",
     attrs: {
-      src: [_vm.userConversation.photo != "" ? _vm.userConversation.photo : "https://img2.gratispng.com/20180331/eow/kisspng-computer-icons-user-clip-art-user-5abf13db298934.2968784715224718991702.jpg"],
+      src: [_vm.userConversation.photo != "" ? _vm.userConversation.photo : "https://png.pngtree.com/png-clipart/20210722/ourlarge/pngtree-girl-logo-with-headphones-and-eyeglass-png-image_3717549.jpg"],
       alt: ""
     }
   })]), _vm._v(" "), _c("div", {
@@ -2452,7 +2504,10 @@ var render = function render() {
       d: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
     }
   })])])])]), _vm._v(" "), _c("div", {
-    staticClass: "chat-window__messages-wrapper"
+    staticClass: "chat-window__messages-wrapper",
+    style: [_vm.me.preference.background_chat ? {
+      "background-image": "url('".concat(_vm.me.preference.background_chat, "')")
+    } : ""]
   }, [_c("div", {
     ref: "messages",
     staticClass: "chat-window__messages-inner"
@@ -2649,7 +2704,7 @@ var render = function render() {
     }, [_c("img", {
       staticClass: "w-12 h-12 rounded-full",
       attrs: {
-        src: [user.photo != "" ? user.photo : "https://img2.gratispng.com/20180331/eow/kisspng-computer-icons-user-clip-art-user-5abf13db298934.2968784715224718991702.jpg"],
+        src: [user.photo != "" ? user.photo : "https://png.pngtree.com/png-clipart/20210722/ourlarge/pngtree-girl-logo-with-headphones-and-eyeglass-png-image_3717549.jpg"],
         alt: user.name
       }
     }), _vm._v(" "), user.online ? _c("span", {
@@ -2779,7 +2834,7 @@ var staticRenderFns = [function () {
   }, [_c("img", {
     staticClass: "w-24 lg:w-full mx-auto",
     attrs: {
-      src: ""
+      src: "https://www.canva.com/design/DAFivS8pVRI/view"
     }
   })]);
 }];
@@ -2867,7 +2922,7 @@ var render = function render() {
   }, [_c("users", {
     attrs: {
       "all-users": _vm.allUsers,
-      title: "Desenvolvedores"
+      title: "Desenvolvedoras"
     }
   }), _vm._v(" "), _c("conversation")], 1);
 };
@@ -2892,7 +2947,216 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_vm._v("\n  #profile\n")]);
+  return _c("div", {
+    staticClass: "md:grid md:grid-cols-1 md:gap-6 p-8 overflow-y-auto",
+    staticStyle: {
+      "max-height": "100vh"
+    }
+  }, [_c("div", {
+    staticClass: "bg-white p-8 shadow sm:rounded-md sm:overflow-hidden"
+  }, [_vm.me.photo === "" ? _c("span", {
+    staticClass: "inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100"
+  }, [_c("svg", {
+    staticClass: "h-full w-full text-gray-300",
+    attrs: {
+      fill: "currentColor",
+      viewBox: "0 0 24 24"
+    }
+  }, [_c("path", {
+    attrs: {
+      d: "M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"
+    }
+  })])]) : _c("div", {
+    staticClass: "inline-block"
+  }, [_c("img", {
+    staticClass: "h-12 w-12 rounded-full",
+    attrs: {
+      src: _vm.me.photo,
+      alt: _vm.me.name
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "inline-block"
+  }, [_c("input", {
+    staticClass: "p6",
+    attrs: {
+      type: "file"
+    },
+    on: {
+      change: _vm.updatePhoto
+    }
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "bg-white shadow sm:rounded-md sm:overflow-hidden"
+  }, [_c("div", {
+    staticClass: "p-6"
+  }, [_c("div", {
+    staticClass: "col-span-6 sm:col-span-4 py-2"
+  }, [_c("label", {
+    staticClass: "block text-sm font-medium text-gray-700",
+    attrs: {
+      "for": "nome"
+    }
+  }, [_vm._v("Nome")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.me.name,
+      expression: "me.name"
+    }],
+    staticClass: "w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500",
+    attrs: {
+      type: "text",
+      name: "name",
+      id: "name",
+      autocomplete: "email"
+    },
+    domProps: {
+      value: _vm.me.name
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.me, "name", $event.target.value);
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "col-span-6 sm:col-span-4 py-2"
+  }, [_c("label", {
+    staticClass: "block text-sm font-medium text-gray-700",
+    attrs: {
+      "for": "email_address"
+    }
+  }, [_vm._v("E-mail")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.me.email,
+      expression: "me.email"
+    }],
+    staticClass: "w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500",
+    attrs: {
+      type: "text",
+      name: "email",
+      id: "email",
+      autocomplete: "email",
+      disabled: ""
+    },
+    domProps: {
+      value: _vm.me.email
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.me, "email", $event.target.value);
+      }
+    }
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "px-4 py-3 bg-gray-50 text-right sm:px-6"
+  }, [_c("button", {
+    staticClass: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+    attrs: {
+      type: "submit"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.updateProfile.apply(null, arguments);
+      }
+    }
+  }, [_vm._v("\n            Atualizar\n          ")])])]), _vm._v(" "), _c("div", {
+    staticClass: "bg-white shadow sm:rounded-md sm:overflow-hidden"
+  }, [_c("div", {
+    staticClass: "p-6"
+  }, [_c("div", {
+    staticClass: "col-span-6 sm:col-span-4 py-2"
+  }, [_c("label", {
+    attrs: {
+      "for": "notifications"
+    }
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.me.preference.me_notify,
+      expression: "me.preference.me_notify"
+    }],
+    staticClass: "px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500",
+    attrs: {
+      type: "checkbox",
+      name: "me_notify",
+      id: "me_notify",
+      autocomplete: "email"
+    },
+    domProps: {
+      checked: Array.isArray(_vm.me.preference.me_notify) ? _vm._i(_vm.me.preference.me_notify, null) > -1 : _vm.me.preference.me_notify
+    },
+    on: {
+      change: [function ($event) {
+        var $$a = _vm.me.preference.me_notify,
+          $$el = $event.target,
+          $$c = $$el.checked ? true : false;
+        if (Array.isArray($$a)) {
+          var $$v = null,
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && _vm.$set(_vm.me.preference, "me_notify", $$a.concat([$$v]));
+          } else {
+            $$i > -1 && _vm.$set(_vm.me.preference, "me_notify", $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
+          }
+        } else {
+          _vm.$set(_vm.me.preference, "me_notify", $$c);
+        }
+      }, _vm.toogleNotify]
+    }
+  }), _vm._v("\n                    Receber Notificações?\n                ")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "bg-white shadow sm:rounded-md sm:overflow-hidden"
+  }, [_c("div", {
+    staticClass: "p-6"
+  }, [_c("div", {
+    staticClass: "col-span-6 sm:col-span-4 py-2"
+  }, [_c("label", {
+    staticClass: "block text-sm font-medium text-gray-700",
+    attrs: {
+      "for": "email_address"
+    }
+  }, [_vm._v("Atualizar Background")]), _vm._v(" "), _c("input", {
+    staticClass: "w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500",
+    attrs: {
+      type: "file",
+      name: "image_chat",
+      id: "image_chat",
+      autocomplete: "email"
+    },
+    on: {
+      change: _vm.updateBackgroundChat
+    }
+  })])]), _vm._v(" "), _vm.me.preference.background_chat ? _c("div", {
+    staticClass: "px-4 py-3 bg-gray-50 text-right sm:px-6"
+  }, [_c("button", {
+    staticClass: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+    attrs: {
+      type: "submit"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.removeImageChat.apply(null, arguments);
+      }
+    }
+  }, [_vm._v("\n            Remover Imagem do Chat\n          ")])]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "bg-white shadow sm:rounded-md sm:overflow-hidden"
+  }, [_c("div", {
+    staticClass: "p-6"
+  }, [_c("div", {
+    staticClass: "col-span-6 sm:col-span-4 py-2"
+  }, [_c("button", {
+    staticClass: "w-full h-12 px-6 text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800",
+    attrs: {
+      disabled: _vm.isLougouting
+    },
+    on: {
+      click: _vm.logoutNow
+    }
+  }, [_vm.isLougouting ? _c("span", [_vm._v("Saindo")]) : _c("span", [_vm._v("Sair")])])])])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2916,6 +3180,7 @@ var userId = window.Laravel.user;
 window.Echo.channel("laravel_database_private-chat.".concat(userId)).listen('NewMessageCreated', function (e) {
   console.log(e.message);
   var conversation = e.message;
+  if (!_vuex_store__WEBPACK_IMPORTED_MODULE_0__["default"].state.me.me.preference.me_notify) return;
   vue__WEBPACK_IMPORTED_MODULE_1__["default"].$vToastify.success("\n         Messagem: ".concat(conversation, "\n    "), "".concat(conversation.sender.name, " te enviou uma nova mensagem"));
   _vuex_store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('ADD_MESSAGE', conversation);
 });
@@ -2961,6 +3226,7 @@ var app = new Vue({
   store: _vuex_store__WEBPACK_IMPORTED_MODULE_1__["default"],
   router: _routes__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
+_vuex_store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('getMe');
 
 /***/ }),
 
@@ -3025,7 +3291,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     component: _pages_Profile__WEBPACK_IMPORTED_MODULE_2__["default"],
     name: 'profile'
   }],
-  linkActiveClass: 'is-active'
+  linkExactActiveClass: 'is-active'
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
 
@@ -3092,6 +3358,98 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
           me: true
         });
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/vuex/modules/me/index.js":
+/*!***********************************************!*\
+  !*** ./resources/js/vuex/modules/me/index.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+var CONFIGS = {
+  headers: {
+    'content-type': 'multipart/form-data'
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  state: {
+    favorites: [],
+    me: {
+      name: "",
+      email: "",
+      photo: "",
+      isMyFavorite: false,
+      preference: {
+        me_notify: true,
+        background_chat: ""
+      }
+    }
+  },
+  mutations: {
+    SET_ME: function SET_ME(state, me) {
+      state.me = me;
+    }
+  },
+  actions: {
+    getMe: function getMe(_ref) {
+      var commit = _ref.commit;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/v1/me').then(function (response) {
+        return commit('SET_ME', response.data.data);
+      });
+    },
+    updatePhotoProfile: function updatePhotoProfile(_ref2, formData) {
+      var dispatch = _ref2.dispatch;
+      formData.append('_method', 'PATCH');
+      return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/v1/profile/update-photo', formData, CONFIGS).then(function (response) {
+        return dispatch('getMe');
+      });
+    },
+    update: function update(_ref3, formData) {
+      var dispatch = _ref3.dispatch;
+      return axios__WEBPACK_IMPORTED_MODULE_0___default().patch('/api/v1/profile/update', _objectSpread({}, formData)).then(function (response) {
+        return dispatch('getMe');
+      });
+    },
+    toogleNotify: function toogleNotify(_ref4) {
+      var dispatch = _ref4.dispatch,
+        state = _ref4.state;
+      return axios__WEBPACK_IMPORTED_MODULE_0___default().patch('/api/v1/profile/update-preference', {
+        me_notify: state.me.preference.me_notify
+      });
+    },
+    updateImageChat: function updateImageChat(_ref5, formData) {
+      var dispatch = _ref5.dispatch;
+      formData.append('_method', 'PATCH');
+      return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/v1/profile/update-image-chat', formData, CONFIGS).then(function (response) {
+        return dispatch('getMe');
+      });
+    },
+    removeImageChat: function removeImageChat(_ref6) {
+      var dispatch = _ref6.dispatch;
+      return axios__WEBPACK_IMPORTED_MODULE_0___default().patch('/api/v1/profile/remove-image-chat').then(function (response) {
+        return dispatch('getMe');
+      });
+    },
+    logout: function logout() {
+      return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/v1/logout');
     }
   }
 });
@@ -3245,19 +3603,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_users__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/users */ "./resources/js/vuex/modules/users/index.js");
 /* harmony import */ var _modules_chat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/chat */ "./resources/js/vuex/modules/chat/index.js");
+/* harmony import */ var _modules_me__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/me */ "./resources/js/vuex/modules/me/index.js");
 
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3__["default"]);
-var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
+
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_4__["default"]);
+var store = new vuex__WEBPACK_IMPORTED_MODULE_4__["default"].Store({
   modules: {
     users: _modules_users__WEBPACK_IMPORTED_MODULE_0__["default"],
-    chat: _modules_chat__WEBPACK_IMPORTED_MODULE_1__["default"]
+    chat: _modules_chat__WEBPACK_IMPORTED_MODULE_1__["default"],
+    me: _modules_me__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);

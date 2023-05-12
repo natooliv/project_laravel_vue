@@ -8108,27 +8108,27 @@ video {
 
 .border-gray-100 {
   --tw-border-opacity: 1;
-  border-color: rgba(243, 244, 246, var(--tw-border-opacity));
+  border-color: border-color: rgba(251, 231, 239);
 }
 
 .border-gray-200 {
   --tw-border-opacity: 1;
-  border-color: rgba(229, 231, 235, var(--tw-border-opacity));
+  border-color: rgba(251, 231, 239);
 }
 
 .border-gray-300 {
   --tw-border-opacity: 1;
-  border-color: rgba(209, 213, 219, var(--tw-border-opacity));
+  border-color: rgba(251, 231, 239);
 }
 
 .border-gray-400 {
   --tw-border-opacity: 1;
-  border-color: rgba(156, 163, 175, var(--tw-border-opacity));
+  border-color: rgba(251, 231, 239);
 }
 
 .border-gray-500 {
   --tw-border-opacity: 1;
-  border-color: rgba(107, 114, 128, var(--tw-border-opacity));
+  border-color: rgba(251, 231, 239);
 }
 
 .border-gray-600 {
@@ -20860,8 +20860,8 @@ video {
 * {
   --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
   --tw-ring-offset-width: 0px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: rgba(59, 130, 246, 0.5);
+  --tw-ring-offset-color:rgba(251, 231, 239);
+  --tw-ring-color: rgba(251, 231, 239);
   --tw-ring-offset-shadow: 0 0 #0000;
   --tw-ring-shadow: 0 0 #0000;
 }
@@ -30649,7 +30649,7 @@ video {
 }
 
 #app {
-  background-color: #f1f1f1;
+  background-color: rgba(251, 231, 239);
 }
 
 .chat-wrapper {
@@ -30659,7 +30659,7 @@ video {
 
 .chat-aside {
   --tw-bg-opacity: 1;
-  background-color: rgba(67, 56, 202, var(--tw-bg-opacity));
+  background-color: rgba(239, 207, 227);
   display: flex;
   align-items: center;
   justify-content: space-between;

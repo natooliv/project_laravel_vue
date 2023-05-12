@@ -20,14 +20,14 @@ class ProfileApiController extends Controller
 
     public function updatePhoto(UpdatePhoto $request)
     {
-        $user = $request->user();
+        $user=$request->user();
 
         if ($user->image && Storage::exists($user->image)) {
             Storage::delete($user->image);
         }
 
         if ($path = $request->image->store('users/profile')) {
-            $user->update(['image' => $path]);
+            $request->user()->update(['image' => $path]);
 
             return response()->json(['message' => 'success']);
         }
@@ -44,29 +44,24 @@ class ProfileApiController extends Controller
 
     public function updatePreference(UpdateUserPreference $request)
     {
-        $preference = $request->user()->preference()->firstOrCreate();
-
+        $preference=$request->user()->preference()->firstOrCreate();
         $preference->update([
-            'me_notify' => $request->me_notify
+            'me_notify'=>$request->me_notify,
         ]);
-
         return response()->json(['message' => 'success']);
-    }
 
+    }
     public function updatePreferenceImageChat(UpdatePhoto $request)
     {
-        $preference = $request->user()->preference()->firstOrCreate();
+        $preference=$request->user()->preference()->firstOrCreate();
 
         if ($path = $request->image->store('users/chat')) {
             $preference->update([
-                'image_background_chat' => $path
+                'image_background_chat'=>$path,
             ]);
+            $request->user()->update(['image_chat' => $path]);
 
             return response()->json(['message' => 'success']);
-        }
-
-        if ($preference->image_background_chat && Storage::exists($preference->image_background_chat)) {
-            Storage::delete($preference->image_background_chat);
         }
 
         return response()->json(['message' => 'fail'], 500);
@@ -86,7 +81,6 @@ class ProfileApiController extends Controller
 
         return response()->json(['message' => 'success']);
     }
-
     public function logout()
     {
         Auth::logout();

@@ -26,7 +26,7 @@
                 </svg>
               </span>
               <img
-                :src="[userConversation.photo != '' ? userConversation.photo : 'https://img2.gratispng.com/20180331/eow/kisspng-computer-icons-user-clip-art-user-5abf13db298934.2968784715224718991702.jpg']"
+                :src="[userConversation.photo != '' ? userConversation.photo : 'https://png.pngtree.com/png-clipart/20210722/ourlarge/pngtree-girl-logo-with-headphones-and-eyeglass-png-image_3717549.jpg']"
                 alt=""
                 class="w-10 h-10 rounded-full"
               />
@@ -62,7 +62,11 @@
             </button>
           </div>
         </div>
-        <div class="chat-window__messages-wrapper">
+        <div class="chat-window__messages-wrapper"
+        :style="[
+            me.preference.background_chat ?
+            {'background-image' : `url('${me.preference.background_chat}')`}
+            : '']">
           <!-- chat msgs  -->
           <div class="chat-window__messages-inner" ref="messages">
             <div class="chat-messages">
@@ -157,6 +161,7 @@ export default {
     ...mapState({
       userConversation: (state) => state.chat.userConversation,
       messages: (state) => state.chat.messages,
+      me: (state) => state.me.me,
     }),
   },
   data() {

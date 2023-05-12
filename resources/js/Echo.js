@@ -7,6 +7,8 @@ window.Echo.channel(`laravel_database_private-chat.${userId}`)
 .listen('NewMessageCreated', (e) => {
     console.log(e.message);
     let conversation =  e.message
+    if(!store.state.me.me.preference.me_notify) return;
+
     Vue.$vToastify.success(`
          Messagem: ${conversation}
     `,

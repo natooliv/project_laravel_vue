@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image',
     ];
 
     /**
@@ -59,11 +60,16 @@ class User extends Authenticatable
                         ->where('user_id', auth()->user()->id);
     }
 
+    public function preference()
+    {
+        return $this->hasOne(Preference::class);
+    }
+
     public function allusers()
     {
          return $this->inRandomOrder()
                         ->where('id','!=',auth()->user()->id)
-                        ->with(['favorite'])
+                        ->with(['favorite','preference'])
                         ->get();
 
     }
