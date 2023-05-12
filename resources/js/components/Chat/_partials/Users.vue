@@ -45,7 +45,7 @@
           <div class="flex items-center relative">
             <div class="relative">
               <img
-              :src="[user.photo != '' ? user.photo : '/images/no-photo.png']"
+                :src="[user.photo != '' ? user.photo : 'https://img2.gratispng.com/20180331/eow/kisspng-computer-icons-user-clip-art-user-5abf13db298934.2968784715224718991702.jpg']"
                 :alt="user.name"
                 class="w-12 h-12 rounded-full"
               />

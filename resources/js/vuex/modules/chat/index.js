@@ -24,6 +24,7 @@ export default {
         CLEAR_MESSAGES (state) {
             state.messages = []
         },
+
     },
 
     actions: {

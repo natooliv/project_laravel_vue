@@ -1,6 +1,6 @@
 <template>
     <aside class="chat-aside">
-        <div class="px-2 lg:py-2"><img class="w-24 lg:w-full mx-auto" src="/images/content/logo-larachat.png"></div>
+        <div class="px-2 lg:py-2"><img class="w-24 lg:w-full mx-auto" ></div>
         <nav class="nav-tab">
           <a href="#inbox" :class="{ 'is-active': selected === 'inbox' }">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"

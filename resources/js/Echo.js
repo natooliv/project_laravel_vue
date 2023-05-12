@@ -6,11 +6,12 @@ const userId = window.Laravel.user
 window.Echo.channel(`laravel_database_private-chat.${userId}`)
 .listen('NewMessageCreated', (e) => {
     console.log(e.message);
-
+    let conversation =  e.message
     Vue.$vToastify.success(`
-         Messagem: ${conversation.message}
+         Messagem: ${conversation}
     `,
     `${conversation.sender.name} te enviou uma nova mensagem`)
+    store.commit('ADD_MESSAGE', conversation);
 })
 
 window.Echo.join('laravel_database_chatroom')

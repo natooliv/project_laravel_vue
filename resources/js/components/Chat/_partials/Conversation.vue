@@ -26,7 +26,7 @@
               </svg>
             </span>
             <img
-              :src="[userConversation.photo != '' ? userConversation.photo : '/images/no-photo.png']"
+              :src="[userConversation.photo != '' ? userConversation.photo : 'https://img2.gratispng.com/20180331/eow/kisspng-computer-icons-user-clip-art-user-5abf13db298934.2968784715224718991702.jpg']"
               alt=""
               class="w-10 h-10 rounded-full"
             />
@@ -64,7 +64,7 @@
       </div>
       <div class="chat-window__messages-wrapper">
         <!-- chat msgs  -->
-        <div class="chat-window__messages-inner">
+        <div class="chat-window__messages-inner" ref="messages">
           <div class="chat-messages">
             <div
                 v-for="(message, index) in messages"
@@ -73,7 +73,7 @@
               <div class="inner">
                 <div class="profile" v-if="!message.me">
                   <img
-                    :src="[message.sender.photo != '' ? message.sender.photo : '/images/no-photo.png']"
+                    :src="[message.sender.photo != '' ? message.sender.photo : 'https://img2.gratispng.com/20180331/eow/kisspng-computer-icons-user-clip-art-user-5abf13db298934.2968784715224718991702.jpg']"
                     :alt="message.sender.name"
                     class="w-10 h-10 rounded-full"
                   />
@@ -111,6 +111,7 @@
             <div class="flex-grow ml-4">
               <div class="relative w-full">
                 <input
+                v-model="message"
                   type="text"
                   class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
                 />
@@ -118,6 +119,8 @@
             </div>
             <div class="ml-4">
               <button
+              type="submit"
+              @click.prevent="sendMessage"
                 class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0"
               >
                 <span>Enviar</span>
@@ -154,6 +157,30 @@ export default {
         userConversation:(state) =>state.chat.userConversation,
         messages:(state) => state.chat.messages,
       })
+    },
+     data(){
+        return{
+            message:''
+        }
+     },
+    methods:{
+        ...mapActions(['sendNewMessage']),
+        scrollMessages(){
+            setTimeout(()=>{
+                this.$refs.messages.scrollTo(0, this.$refs.messages.scrollHeight)
+            },10)
+
+
+        }
+    },
+    watch:{
+        messages(){
+            this.scrollMessages()
+        }
+    },
+    sendMessage(){
+        this.sendNewMessage(this.message)
+
     }
 };
 </script>
