@@ -47,13 +47,13 @@ Vue e Vuex
 Vue.js é um framework JavaScript progressivo que permite a construção de interfaces de usuário interativas. Ele é usado na aplicação para criar componentes reutilizáveis e gerenciar o estado da aplicação. O Vuex é uma biblioteca de gerenciamento de estado para Vue.js, que facilita o compartilhamento e a atualização de dados entre os componentes.
 
 **Prós:**
-Facilita a criação de interfaces de usuário interativas e responsivas.
-Permite a reutilização de componentes e modularização do código.
-O Vuex simplifica o gerenciamento do estado da aplicação.
+- Facilita a criação de interfaces de usuário interativas e responsivas.
+- Permite a reutilização de componentes e modularização do código.
+- O Vuex simplifica o gerenciamento do estado da aplicação.
 
 **Contras:**
-Pode exigir uma curva de aprendizado inicial para entender corretamente o Vue.js e o Vuex.
-Pode exigir mais tempo para configurar e personalizar a interface de usuário.
+- Pode exigir uma curva de aprendizado inicial para entender corretamente o Vue.js e o Vuex.
+- Pode exigir mais tempo para configurar e personalizar a interface de usuário.
 
 ## Conclusão
 A aplicação de chat em tempo real para desenvolvedoras é uma solução poderosa para facilitar a comunicação e o networking na área de desenvolvimento de software. A combinação das tecnologias Laravel, Vue.js, Docker, SQL, Redis e Laravel-Socket.IO permite construir uma aplicação escalável, eficiente e interativa.
