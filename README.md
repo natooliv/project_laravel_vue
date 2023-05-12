@@ -55,6 +55,6 @@ O Vuex simplifica o gerenciamento do estado da aplicação.
 Pode exigir uma curva de aprendizado inicial para entender corretamente o Vue.js e o Vuex.
 Pode exigir mais tempo para configurar e personalizar a interface de usuário.
 
-**Conclusão**
+## Conclusão
 A aplicação de chat em tempo real para desenvolvedoras é uma solução poderosa para facilitar a comunicação e o networking na área de desenvolvimento de software. A combinação das tecnologias Laravel, Vue.js, Docker, SQL, Redis e Laravel-Socket.IO permite construir uma aplicação escalável, eficiente e interativa.
 
