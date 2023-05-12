@@ -3,7 +3,7 @@
       <div class="px-2 lg:py-2">
         <img
           class="w-24 lg:w-full mx-auto"
-          src="htps://img.freepik.com/vetores-premium/cabeca-de-mulher-samurai-usa-mascara-cibernetica-no-logotipo-do-estilo-cyberpunk_132871-279.jpg?w=2000"
+          src="https://img.freepik.com/vetores-gratis/linda-garota-gamer-jogando-computador-cartoon-vector-icon-ilustracao-conceito-de-icone-de-tecnologia-de-pessoas-isolado-vetor-premium-estilo-flat-cartoon_138676-3985.jpg?w=2000"
         />
       </div>
       <nav class="nav-tab">
