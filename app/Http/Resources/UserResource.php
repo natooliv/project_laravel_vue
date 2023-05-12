@@ -20,6 +20,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'photo' => '',
             'online'=>false,
+            'isMyFavorite'=>$this->favorite->count() > 0,
 
         ];
     }
